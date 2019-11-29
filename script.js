@@ -12,9 +12,17 @@ const elements = {
 
 function renderTodoList() {
   elements.todoList.innerHTML = null;
-  todos.forEach(function(todo) {
+  todos.forEach(function(todo, index) {
     const newTodo = document.createElement("li");
     newTodo.innerText = todo;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.innerText = "delete";
+    deleteButton.addEventListener("click", function() {
+      deleteTodo(index);
+    });
+
+    newTodo.append(" | ", deleteButton);
     elements.todoList.appendChild(newTodo);
   });
 }
@@ -32,6 +40,12 @@ function addTodo() {
     elements.todoInput.value = "";
     elements.todoInput.focus();
   }
+}
+
+function deleteTodo(index) {
+  todos.splice(index, 1);
+  localStorage.setItem("todos", JSON.stringify(todos));
+  renderTodoList();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
