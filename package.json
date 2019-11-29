@@ -5,9 +5,12 @@
   "author": "Griko Nibras (hello@griko.id)",
   "homepage": "https://github.com/grikomsn/localtodo#readme",
   "scripts": {
+    "start": "serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {},
+  "dependencies": {
+    "serve": "^11.2.0"
+  },
   "devDependencies": {},
   "repository": "https://github.com/grikomsn/localtodo",
   "license": "MIT"
