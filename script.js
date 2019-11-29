@@ -1,8 +1,21 @@
+const defaultTodos = ["do this", "do that", "do another"];
+
+const todos = defaultTodos;
+
 const elements = {
   todoList: document.getElementById("todo-list"),
   todoInput: document.getElementById("todo-input"),
   addButton: document.getElementById("add-todo")
 };
+
+function renderTodoList() {
+  elements.todoList.innerHTML = null;
+  todos.forEach(function(todo) {
+    const newTodo = document.createElement("li");
+    newTodo.innerText = todo;
+    elements.todoList.appendChild(newTodo);
+  });
+}
 
 function isInputFilled() {
   return elements.todoInput.value.length > 0;
@@ -11,10 +24,8 @@ function isInputFilled() {
 function addTodo() {
   if (isInputFilled()) {
     const todoText = elements.todoInput.value;
-    const newTodoElement = document.createElement("li");
-    newTodoElement.innerText = todoText;
-
-    elements.todoList.appendChild(newTodoElement);
+    todos.push(todoText);
+    renderTodoList();
     elements.todoInput.value = "";
     elements.todoInput.focus();
   }
@@ -30,4 +41,5 @@ elements.addButton.addEventListener("click", function() {
   addTodo();
 });
 
+renderTodoList();
 elements.todoInput.focus();
