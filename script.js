@@ -5,7 +5,8 @@ const todos = [...(JSON.parse(localStorage.getItem("todos")) || defaultTodos)];
 const elements = {
   todoList: document.getElementById("todo-list"),
   todoInput: document.getElementById("todo-input"),
-  addButton: document.getElementById("add-todo")
+  addButton: document.getElementById("add-todo"),
+  resetButton: document.getElementById("reset-todo")
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -58,6 +59,11 @@ elements.todoInput.addEventListener("keypress", function(e) {
 
 elements.addButton.addEventListener("click", function() {
   addTodo();
+});
+
+elements.resetButton.addEventListener("click", function() {
+  localStorage.clear();
+  window.location.reload();
 });
 
 ///////////////////////////////////////////////////////////////////////////////
