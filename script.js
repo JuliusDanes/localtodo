@@ -1,4 +1,8 @@
-const defaultTodos = ["do this", "do that", "do another"];
+const defaultTodos = [
+  { text: "do this", completed: false },
+  { text: "do that", completed: false },
+  { text: "do another", completed: true }
+];
 
 const todos = [...(JSON.parse(localStorage.getItem("todos")) || defaultTodos)];
 
@@ -15,7 +19,7 @@ function renderTodoList() {
   elements.todoList.innerHTML = null;
   todos.forEach(function(todo, index) {
     const newTodo = document.createElement("li");
-    newTodo.innerText = todo;
+    newTodo.innerText = todo.text;
 
     const deleteButton = document.createElement("button");
     deleteButton.innerText = "delete";
@@ -35,7 +39,7 @@ function isInputFilled() {
 function addTodo() {
   if (isInputFilled()) {
     const todoText = elements.todoInput.value;
-    todos.push(todoText);
+    todos.push({ text: todoText, completed: false });
     localStorage.setItem("todos", JSON.stringify(todos));
     renderTodoList();
     elements.todoInput.value = "";
