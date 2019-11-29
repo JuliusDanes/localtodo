@@ -23,6 +23,14 @@ function renderTodoList() {
 
     if (todo.completed) {
       newTodo.classList.add("done");
+    } else {
+      const completeButton = document.createElement("button");
+      completeButton.innerText = "mark as complete";
+      completeButton.addEventListener("click", function() {
+        completeTodo(index);
+      });
+
+      newTodo.append(" | ", completeButton);
     }
 
     const deleteButton = document.createElement("button");
@@ -49,6 +57,12 @@ function addTodo() {
     elements.todoInput.value = "";
     elements.todoInput.focus();
   }
+}
+
+function completeTodo(index) {
+  todos[index].completed = true;
+  localStorage.setItem("todos", JSON.stringify(todos));
+  renderTodoList();
 }
 
 function deleteTodo(index) {
