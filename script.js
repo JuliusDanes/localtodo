@@ -4,7 +4,7 @@ const defaultTodos = [
   { text: "do another", completed: true }
 ];
 
-const todos = [...(JSON.parse(localStorage.getItem("todos")) || defaultTodos)];
+const todos = JSON.parse(localStorage.getItem("todos")) || defaultTodos;
 
 const elements = {
   todoList: document.getElementById("todo-list"),
@@ -17,7 +17,7 @@ const elements = {
 
 function renderTodoList() {
   elements.todoList.innerHTML = null;
-  todos.forEach(function(todo, index) {
+  todos.forEach((todo, index) => {
     const newTodo = document.createElement("li");
     newTodo.innerText = todo.text;
 
@@ -26,22 +26,22 @@ function renderTodoList() {
     } else {
       const completeButton = document.createElement("button");
       completeButton.innerText = "mark as complete";
-      completeButton.addEventListener("click", function() {
-        completeTodo(index);
-      });
-
+      completeButton.addEventListener("click", () => completeTodo(index));
       newTodo.append(" | ", completeButton);
     }
 
     const deleteButton = document.createElement("button");
     deleteButton.innerText = "delete";
-    deleteButton.addEventListener("click", function() {
-      deleteTodo(index);
-    });
-
+    deleteButton.addEventListener("click", () => deleteTodo(index));
     newTodo.append(" | ", deleteButton);
-    elements.todoList.appendChild(newTodo);
+
+    elements.todoList.append(newTodo);
   });
+}
+
+function storeAndRender() {
+  localStorage.setItem("todos", JSON.stringify(todos));
+  renderTodoList();
 }
 
 function isInputFilled() {
@@ -52,8 +52,7 @@ function addTodo() {
   if (isInputFilled()) {
     const todoText = elements.todoInput.value;
     todos.push({ text: todoText, completed: false });
-    localStorage.setItem("todos", JSON.stringify(todos));
-    renderTodoList();
+    storeAndRender();
     elements.todoInput.value = "";
     elements.todoInput.focus();
   }
@@ -61,34 +60,28 @@ function addTodo() {
 
 function completeTodo(index) {
   todos[index].completed = true;
-  localStorage.setItem("todos", JSON.stringify(todos));
-  renderTodoList();
+  storeAndRender();
 }
 
 function deleteTodo(index) {
   todos.splice(index, 1);
-  localStorage.setItem("todos", JSON.stringify(todos));
-  renderTodoList();
+  storeAndRender();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-elements.todoInput.addEventListener("keypress", function(e) {
-  if (e.keyCode === 13) {
-    addTodo();
-  }
-});
+elements.todoInput.addEventListener("keypress", e =>
+  e.keyCode === 13 ? addTodo() : {}
+);
 
-elements.addButton.addEventListener("click", function() {
-  addTodo();
-});
+elements.addButton.addEventListener("click", () => addTodo());
 
-elements.resetButton.addEventListener("click", function() {
+elements.resetButton.addEventListener("click", () => {
   localStorage.clear();
   window.location.reload();
 });
 
 ///////////////////////////////////////////////////////////////////////////////
 
-renderTodoList();
+storeAndRender();
 elements.todoInput.focus();
