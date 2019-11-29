@@ -5,7 +5,7 @@
   "author": "Griko Nibras (hello@griko.id)",
   "homepage": "https://github.com/grikomsn/localtodo#readme",
   "scripts": {
-    "start": "serve",
+    "start": "serve public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
