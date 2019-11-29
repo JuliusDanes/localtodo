@@ -8,6 +8,8 @@ const elements = {
   addButton: document.getElementById("add-todo")
 };
 
+///////////////////////////////////////////////////////////////////////////////
+
 function renderTodoList() {
   elements.todoList.innerHTML = null;
   todos.forEach(function(todo) {
@@ -32,6 +34,8 @@ function addTodo() {
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 elements.todoInput.addEventListener("keypress", function(e) {
   if (e.keyCode === 13) {
     addTodo();
@@ -41,6 +45,8 @@ elements.todoInput.addEventListener("keypress", function(e) {
 elements.addButton.addEventListener("click", function() {
   addTodo();
 });
+
+///////////////////////////////////////////////////////////////////////////////
 
 renderTodoList();
 elements.todoInput.focus();
