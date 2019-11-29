@@ -21,6 +21,10 @@ function renderTodoList() {
     const newTodo = document.createElement("li");
     newTodo.innerText = todo.text;
 
+    if (todo.completed) {
+      newTodo.classList.add("done");
+    }
+
     const deleteButton = document.createElement("button");
     deleteButton.innerText = "delete";
     deleteButton.addEventListener("click", function() {

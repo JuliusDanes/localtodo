@@ -17,3 +17,8 @@ ul {
 li {
   padding-left: 0.75rem;
 }
+
+ul li.done {
+  color: green;
+  list-style-type: "\2705";
+}
