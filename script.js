@@ -1,6 +1,6 @@
 const defaultTodos = ["do this", "do that", "do another"];
 
-const todos = defaultTodos;
+const todos = [...(JSON.parse(localStorage.getItem("todos")) || defaultTodos)];
 
 const elements = {
   todoList: document.getElementById("todo-list"),
@@ -25,6 +25,7 @@ function addTodo() {
   if (isInputFilled()) {
     const todoText = elements.todoInput.value;
     todos.push(todoText);
+    localStorage.setItem("todos", JSON.stringify(todos));
     renderTodoList();
     elements.todoInput.value = "";
     elements.todoInput.focus();
