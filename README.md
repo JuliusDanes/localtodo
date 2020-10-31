@@ -34,3 +34,27 @@ This way it's "bound" with the repository and will not "leak" to the server (thi
 This file does not interfere with git so it won't report any problems (or changes).
 
 For advanced usage (preparing commit message; automatic task finishing) it's required to install git hooks in local repository.
+
+ Requirements
+
+* node >= 7.10
+* npm
+
+# Installation
+
+```
+npm i -g @radmen/git-task
+```
+
+# Available commands
+
+## `add <task>`
+
+Adds new task to a current branch.
+
+It's a default command so `add` keyword may be omitted.
+
+```
+git task Some important stuff
+```
+
